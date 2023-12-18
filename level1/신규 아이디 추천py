@@ -1,0 +1,39 @@
+def solution(new_id):
+
+    #1 
+    new_id = new_id.lower()
+    
+    #2
+    tmp = ''
+    for i in new_id:
+        if i.isalpha() or i.isdigit() or i == '-' or i =='_' or i == '.':
+            tmp += i
+    new_id = tmp
+    
+    #3
+    while ".." in new_id:
+        new_id = new_id.replace("..",".")
+        
+    #4
+    while True:
+        if new_id.startswith('.') or new_id.endswith('.'):
+            if new_id.startswith('.'):
+                new_id = new_id[1:]
+            if new_id.endswith('.'):
+                new_id = new_id[:-1]
+        else:
+            break
+    #5
+    if new_id == "":
+        new_id += 'a'
+    
+    #6
+    if len(new_id) >= 16:
+        new_id = new_id[:15]
+        if new_id[-1] == ".":
+            new_id = new_id[:-1]
+    
+    #7
+    while len(new_id) <= 2:
+        new_id = new_id + new_id[-1]
+    return new_id
